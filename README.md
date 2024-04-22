@@ -29,3 +29,12 @@ Main tutorial being used: https://www.youtube.com/watch?v=JD-age0BPVo&list=PLzMc
 - [ ] SponsorBlock implementation to quickly remove ad spots
 - [ ] Public API to not require the need to go through GUI
 - [ ] Accounts to save video segments to account
+
+## Stack
+### Front End
+- ReactJS
+- Typescript
+
+### Back End
+- Python
+- Django
