@@ -23,6 +23,6 @@ A video download web app that allows you to splice together multiple segments of
 - [ ] Support for Reddit and Twitter
 - [ ] Ability to re-arrange order of segments
 - [ ] Ability to splice in segments from other videos
-- [ ] SponsorBlock
-- [ ] Public API to not require
+- [ ] SponsorBlock implementation to quickly remove ad spots
+- [ ] Public API to not require the need to go through GUI
 - [ ] Accounts to save video segments to account
