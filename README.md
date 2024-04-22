@@ -2,6 +2,8 @@
 ## Description
 A video download web app that allows you to splice together multiple segments of a video without the need for video editing software.
 
+Main tutorial being used: https://www.youtube.com/watch?v=JD-age0BPVo&list=PLzMcBGfZo4-kCLWnGmK0jUBmGLaJxvi4j
+
 ## Tasks
 ### Phase 1 - Beta
 - [ ] Support for Youtube videos
