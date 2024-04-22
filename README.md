@@ -38,3 +38,9 @@ Main tutorial being used: https://www.youtube.com/watch?v=JD-age0BPVo&list=PLzMc
 ### Back End
 - Python
 - Django
+
+### Database
+- PostgreSQL
+
+### Authentication
+- Firebase Authentication
