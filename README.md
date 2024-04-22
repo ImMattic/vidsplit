@@ -7,6 +7,7 @@ Main tutorial being used: https://www.youtube.com/watch?v=JD-age0BPVo&list=PLzMc
 ## Tasks
 ### Phase 1 - Beta
 - [ ] Support for Youtube videos
+- [ ] Discord OAuth with whitelist
 - [ ] Internal API setup
 - [ ] Authentication screen and establishment of sessions to not allow access from the public
 - [ ] Nice looking and clean interface with a simple logo at the center top and a box to put in the URL
