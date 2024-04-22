@@ -2,6 +2,8 @@
 ## Description
 A video download web app that allows you to splice together multiple segments of a video without the need for video editing software.
 
+Main tutorial being used: https://www.youtube.com/watch?v=JD-age0BPVo&list=PLzMcBGfZo4-kCLWnGmK0jUBmGLaJxvi4j
+
 ## Tasks
 ### Phase 1 - Beta
 - [ ] Support for Youtube videos
@@ -23,6 +25,6 @@ A video download web app that allows you to splice together multiple segments of
 - [ ] Support for Reddit and Twitter
 - [ ] Ability to re-arrange order of segments
 - [ ] Ability to splice in segments from other videos
-- [ ] SponsorBlock
-- [ ] Public API to not require
+- [ ] SponsorBlock implementation to quickly remove ad spots
+- [ ] Public API to not require the need to go through GUI
 - [ ] Accounts to save video segments to account
