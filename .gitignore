@@ -1,4 +1,4 @@
 .venv
 secret_key.txt
 .DS_STORE
-./vidsplit/db.sqlite3
+vidsplit/db.sqlite3
