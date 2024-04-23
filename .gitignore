@@ -2,3 +2,5 @@
 secret_key.txt
 .DS_STORE
 vidsplit/db.sqlite3
+**/__pycache__/
+**/migrations/
