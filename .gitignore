@@ -4,3 +4,5 @@ secret_key.txt
 vidsplit/db.sqlite3
 **/__pycache__/
 **/migrations/
+**/vidpsplit/frontend/node_modules/
+node_modules/
