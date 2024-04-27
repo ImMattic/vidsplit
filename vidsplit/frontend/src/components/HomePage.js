@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import RoomJoinPage from "./RoomJoinPage";
 import CreateRoomPage from "./CreateRoomPage";
-import { BrowserRouter as Router, 
-  Switch, 
-  Route, 
-  Link, 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
   Redirect,
-  Routes
+  Routes,
 } from "react-router-dom";
 
 export default class HomePage extends Component {
@@ -15,12 +16,14 @@ export default class HomePage extends Component {
   }
 
   render() {
-      return ( <Router>
+    return (
+      <Router>
         <Routes>
-          <Route path='/' element={ <p>This is the homepage.</p> }/>
-          <Route path='/join' element = {<RoomJoinPage/>}/>
-          <Route path='/create' element = {<CreateRoomPage/>}/>
+          <Route path="/" element={<p>This is the homepage.</p>} />
+          <Route path="/join" element={<RoomJoinPage />} />
+          <Route path="/create" element={<CreateRoomPage />} />
         </Routes>
-      </Router> );
+      </Router>
+    );
   }
 }
