@@ -44,7 +44,7 @@ export default class CreateRoomPage extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         votes_to_skip: this.state.votesToSkip,
-        guest_can_pause: this.state.guestCanPause,
+        guest_can_ause: this.state.guestCanPause,
       }),
     };
     fetch("/api/create-room", requestOptions)
