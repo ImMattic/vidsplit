@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import RoomJoinPage from "./RoomJoinPage";
-import CreateRoomPage from "./CreateRoomPage";
-import Room from "./Room";
+import DownloadPage from "./DownloadPage";
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,20 +8,31 @@ import {
   Redirect,
   Routes,
 } from "react-router-dom";
+import { Grid, Button, ButtonGroup, Typography } from "@mui/material";
 
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
   }
 
+  renderHomePage() {
+    return (
+      <Grid container spacing={3} justify="center">
+        <Grid item>
+          <Typography variant="h4">Welcome to VidSplit!</Typography>
+        </Grid>
+        <Grid item>
+          <Button variant="contained">Submit</Button>
+        </Grid>
+      </Grid>
+    );
+  }
+  HomePageComponent = () => this.renderHomePage();
   render() {
     return (
       <Router>
         <Routes>
-          <Route path="/" element={<p>This is the homepage.</p>} />
-          <Route path="/join" element={<RoomJoinPage />} />
-          <Route path="/create" element={<CreateRoomPage />} />
-          <Route path="/room/:roomCode" element={<Room />} />
+          <Route path="" element={<this.HomePageComponent />} />
         </Routes>
       </Router>
     );
