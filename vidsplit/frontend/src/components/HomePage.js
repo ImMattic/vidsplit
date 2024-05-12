@@ -8,7 +8,14 @@ import {
   Redirect,
   Routes,
 } from "react-router-dom";
-import { Grid, Button, ButtonGroup, Typography } from "@mui/material";
+import {
+  Grid,
+  Button,
+  ButtonGroup,
+  Typography,
+  TextField,
+} from "@mui/material";
+import logo from "../assets/vidsplit-logo.png";
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -17,12 +24,23 @@ export default class HomePage extends Component {
 
   renderHomePage() {
     return (
-      <Grid container spacing={3} justify="center">
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        spacing={2}
+      >
         <Grid item>
-          <Typography variant="h4">Welcome to VidSplit!</Typography>
+          <img src={logo} alt="Logo" className="logo" />
         </Grid>
         <Grid item>
-          <Button variant="contained">Submit</Button>
+          <TextField label="Enter Youtube URL" variant="outlined" />
+        </Grid>
+        <Grid item>
+          <Button variant="contained" color="primary">
+            Submit
+          </Button>
         </Grid>
       </Grid>
     );
@@ -33,6 +51,7 @@ export default class HomePage extends Component {
       <Router>
         <Routes>
           <Route path="" element={<this.HomePageComponent />} />
+          <Route path="/:videoID" element={<DownloadPage />} />
         </Routes>
       </Router>
     );
