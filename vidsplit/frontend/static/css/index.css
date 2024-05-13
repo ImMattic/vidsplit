@@ -4,6 +4,7 @@ body {
   margin: 0;
   padding: 0;
   /*color: white;*/
+  background-color: #141f2b;
 }
 
 #main {
@@ -18,13 +19,32 @@ body {
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
 }
 
 .logo {
-  width: 100%;
+  width: auto;
   height: auto;
   max-height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 50px;
+}
+
+.homepageGrid {
+  min-height: 100vh;
+  min-width: 100vh;
+}
+
+.toplogoBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.submitButton {
+  height: 56px;
+  margin: 10px;
 }
