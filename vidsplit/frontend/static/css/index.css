@@ -23,9 +23,6 @@ body {
 }
 
 .logo {
-  width: auto;
-  height: auto;
-  max-height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,13 +32,14 @@ body {
 .homepageGrid {
   min-height: 100vh;
   min-width: 100vh;
+  height: 100%;
+  width: 100%;
 }
 
 .toplogoBar {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
 }
 
 .submitButton {

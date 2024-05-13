@@ -15,6 +15,8 @@ import {
   Typography,
   TextField,
   GlobalStyles,
+  useMediaQuery,
+  Box,
 } from "@mui/material";
 import {
   alpha,
@@ -23,6 +25,7 @@ import {
   ThemeProvider,
 } from "@mui/material/styles";
 import logo from "../assets/vidsplit-logo-dark-mode.png";
+import { useTheme } from "@mui/material/styles";
 
 const darkTheme = createTheme({
   palette: {
@@ -42,40 +45,49 @@ export default class HomePage extends Component {
   }
 
   renderHomePage() {
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.down("sm"));
     return (
       <ThemeProvider theme={darkTheme}>
-        <div className="toplogoBar">
-          <a href="/">
-            <img src={logo} alt="Vidsplit Logo" className="logo" />
+        <div>
+          <a href="/" className="toplogoBar">
+            <img
+              src={logo}
+              alt="Vidsplit Logo"
+              className="logo"
+              style={{ width: matches ? "70%" : "400px", height: "auto" }}
+            />
           </a>
         </div>
-        <div>
-          <Grid
-            container
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-            spacing={2}
-            className="homepageGrid"
-          >
-            <Grid item>
-              <TextField
-                label="Enter Youtube URL"
-                variant="outlined"
-                color="secondary"
-                size="large"
-                sx={{ width: "500px" }}
-              />
-              <Button
-                variant="contained"
-                color="primary"
-                sx={{ height: "56px", marginLeft: "10px" }}
-              >
-                Submit
-              </Button>
-            </Grid>
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          spacing={2}
+          marginTop={matches ? "20%" : "5%"}
+          sx={{ padding: "0 10%" }}
+        >
+          <Grid item xs={12} sm={12} md={6} lg={3}>
+            <TextField
+              label="Enter Youtube URL"
+              variant="outlined"
+              color="secondary"
+              size="large"
+              fullWidth
+            />
           </Grid>
-        </div>
+          <Grid item xs={4} sm={2} md={2} lg={1}>
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ height: "56px", width: matches ? "100%" : "auto" }}
+            >
+              Submit
+            </Button>
+          </Grid>
+        </Grid>
       </ThemeProvider>
     );
   }
