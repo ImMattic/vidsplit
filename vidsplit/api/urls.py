@@ -1,7 +1,6 @@
 from django.urls import path
-from .views import RoomView, CreateRoomView
+from .views import CreateDownloadPage
 
 urlpatterns = [
-    path("room", RoomView.as_view()),
-    path("create-room", CreateRoomView.as_view()),
+    path(":video_id", CreateDownloadPage.as_view(), name="create-download-page"),
 ]

@@ -1,24 +1,13 @@
 from rest_framework import serializers
-from .models import Room
+from .models import Video
 
 
-class RoomSerializer(serializers.ModelSerializer):
+class VideoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Room
+        model = Video
         fields = (
-            "id",
-            "code",
-            "host",
-            "guest_can_pause",
-            "votes_to_skip",
-            "created_at",
+            "session_id",
+            "video_id",
+            "timestamps",
         )
 
-
-class CreateRoomSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Room
-        fields = (
-            "guest_can_pause",
-            "votes_to_skip",
-        )
