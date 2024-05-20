@@ -35,7 +35,7 @@ Main tutorial being used: https://www.youtube.com/watch?v=JD-age0BPVo&list=PLzMc
 ## Stack
 ### Front End
 - ReactJS
-- Typescript
+- Javascript
 
 ### Back End
 - Python
