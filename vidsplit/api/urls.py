@@ -1,6 +1,9 @@
 from django.urls import path
-from .views import DownloadPage
+from .views import Initialize, Generate, Download, Session
 
 urlpatterns = [
-    path("download", DownloadPage.as_view(), name="download-page"),
+    path("initialize", Initialize.as_view(), name="initialize"),
+    path("generate", Generate.as_view(), name="generate"),
+    path("download", Download.as_view(), name="download"),
+    path("session", Session.as_view(), name="session"),
 ]
