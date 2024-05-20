@@ -1,4 +1,5 @@
-# Vidsplit
+<p align="center"><img src="https://github.com/ImMattic/vidsplit/blob/dev/vidsplit/frontend/src/assets/vidsplit-logo-dark-mode.png" width="500" height=auto /></p>
+
 ## Description
 A video download web app that allows you to splice together multiple segments of a video without the need for video editing software.
 
@@ -45,3 +46,9 @@ Main tutorial being used: https://www.youtube.com/watch?v=JD-age0BPVo&list=PLzMc
 
 ### Authentication
 - Firebase Authentication
+
+# Logic
+![Logic diagram](https://github.com/ImMattic/vidsplit/blob/dev/assets/VidSplit-backend-logic.png)
+
+# API Endpoints
+![API Endpoint diagram](https://github.com/ImMattic/vidsplit/blob/dev/assets/vidsplit_api_endpoints.png)
