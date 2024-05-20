@@ -8,6 +8,7 @@ from rest_framework.response import Response
 
 class DownloadPage(generics.ListAPIView):
     def get(self, request, *args, **kwargs):
+        session_id = self.
         video_id = self.kwargs.get("video_id")
         video = Video.objects.get(id=video_id)
         serializer = VideoSerializer(video)
@@ -15,7 +16,8 @@ class DownloadPage(generics.ListAPIView):
     
     def post(self, request, *args, **kwargs):
         video_id = self.kwargs.get("video_id")
-        video = Video.objects.get(id=video_id)
+        session_id = request.session.session_key
+        video = Video.objects.get(id=video_id, sesh_id = request.session.session_key)
         serializer = VideoSerializer(video, data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
