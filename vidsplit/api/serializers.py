@@ -8,6 +8,7 @@ class VideoSerializer(serializers.ModelSerializer):
         fields = (
             "session_id",
             "video_id",
+            "video_title",
+            "video_length",
             "timestamps",
         )
-
