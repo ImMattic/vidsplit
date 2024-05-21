@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { v4 as uuidv4 } from "uuid";
 import {
   BrowserRouter as Router,
   Switch,
@@ -25,6 +26,7 @@ import {
 } from "@mui/material/styles";
 import logo from "../assets/vidsplit-logo-dark-mode.png";
 import { useTheme } from "@mui/material/styles";
+import DownloadPage from "./DownloadPage";
 
 const darkTheme = createTheme({
   palette: {
@@ -47,19 +49,26 @@ export default class HomePage extends Component {
     };
   }
 
+  // Passes the TextField URL input to the state
   handleInputChange = (event) => {
     this.setState({ url: event.target.value });
   };
 
+  // Handles the submit button interaction
   handleSubmit = () => {
     console.log("Submitted");
     console.log(this.state.url);
+    const sessionID = uuidv4(); // Generates a new session
+    const videoData = {
+      session_id: sessionID,
+      video_url: this.state.url,
+    };
     fetch("api/initialize", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ url: this.state.url }),
+      body: JSON.stringify(videoData),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -102,6 +111,7 @@ export default class HomePage extends Component {
               color="secondary"
               size="large"
               fullWidth
+              onChange={this.handleInputChange}
             />
           </Grid>
           <Grid item xs={4} sm={2} md={2} lg={1}>

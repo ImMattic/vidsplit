@@ -11,12 +11,11 @@ class Initialize(generics.ListAPIView):
     http_method_names = ["post"]
 
     def post(self, request, *args, **kwargs):
-        video_id = self.kwargs.get("video_id")
-        video = Video.objects.get(id=video_id, session_id=request.session.session_key)
-        serializer = VideoSerializer(video, data=request.data)
+        serializer = VideoSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -25,7 +24,7 @@ class Generate(generics.ListAPIView):
 
     def put(self, request, *args, **kwargs):
         video_id = self.kwargs.get("video_id")
-        video = Video.objects.get(id=video_id, session_id=request.session.session_key)
+        video = Video.objects.get(video_id=video_id, session_id=request.session.session_key)
         serializer = VideoSerializer(video, data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
@@ -38,7 +37,7 @@ class Download(generics.ListAPIView):
 
     def get(self, request, *args, **kwargs):
         video_id = self.kwargs.get("video_id")
-        video = Video.objects.get(id=video_id, session_id=request.session.session_key)
+        video = Video.objects.get(video_id=video_id, session_id=request.session.session_key)
         serializer = VideoSerializer(video)
         return Response(serializer.data)
 

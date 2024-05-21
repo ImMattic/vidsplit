@@ -7,6 +7,7 @@ class VideoSerializer(serializers.ModelSerializer):
         model = Video
         fields = (
             "session_id",
+            "video_url",
             "video_id",
             "video_title",
             "video_length",
