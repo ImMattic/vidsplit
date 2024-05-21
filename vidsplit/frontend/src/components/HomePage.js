@@ -27,6 +27,7 @@ import {
 import logo from "../assets/vidsplit-logo-dark-mode.png";
 import { useTheme } from "@mui/material/styles";
 import DownloadPage from "./DownloadPage";
+import Cookies from "js-cookie";
 
 const darkTheme = createTheme({
   palette: {
@@ -49,6 +50,14 @@ export default class HomePage extends Component {
     };
   }
 
+  // Parses the video ID from the URL
+  extractVideoID = (url) => {
+    const regex =
+      "^.*(?:(?:youtu\\.be\\/|v\\/|vi\\/|u\\/\\w\\/|embed\\/|shorts\\/)|(?:(?:watch)?\\?v(?:i)?=|\\&v(?:i)?=))([^#\\&\\?]*).*";
+    const match = url.match(regex);
+    return match && match[1].length === 11 ? match[1] : false;
+  };
+
   // Passes the TextField URL input to the state
   handleInputChange = (event) => {
     this.setState({ url: event.target.value });
@@ -62,6 +71,7 @@ export default class HomePage extends Component {
     const videoData = {
       session_id: sessionID,
       video_url: this.state.url,
+      video_id: this.extractVideoID(this.state.url),
     };
     fetch("api/initialize", {
       method: "POST",
@@ -74,10 +84,14 @@ export default class HomePage extends Component {
       .then((data) => {
         console.log("Success:", data);
         this.setState({ date: data.date });
+        // Redirects to the download page
+        window.location.href =
+          window.location.origin + "/" + videoData.video_id;
       })
       .catch((error) => {
         console.error("Error:", error);
       });
+    Cookies.set("session_id", sessionID);
   };
 
   renderHomePage() {

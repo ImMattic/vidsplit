@@ -28,7 +28,7 @@ class Initialize(generics.ListAPIView):
         serializer = VideoSerializer(data={
             "session_id": initial_request.get("session_id"),
             "video_url": initial_request.get("video_url"),
-            "video_id": video_id,
+            "video_id": initial_request.get("video_id"),
             "video_title": title,
             "video_length": length,
             "video_thumbnail": thumbnail,
