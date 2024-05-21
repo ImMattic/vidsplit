@@ -10,5 +10,6 @@ class VideoSerializer(serializers.ModelSerializer):
             "video_id",
             "video_title",
             "video_length",
+            "video_thumbnail",
             "timestamps",
         )

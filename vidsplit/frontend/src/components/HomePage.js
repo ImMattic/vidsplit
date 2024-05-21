@@ -42,7 +42,35 @@ const darkTheme = createTheme({
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      url: "",
+      date: null,
+    };
   }
+
+  handleInputChange = (event) => {
+    this.setState({ url: event.target.value });
+  };
+
+  handleSubmit = () => {
+    console.log("Submitted");
+    console.log(this.state.url);
+    fetch("api/initialize", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ url: this.state.url }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        this.setState({ date: data.date });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
   renderHomePage() {
     const theme = useTheme();
@@ -83,6 +111,7 @@ export default class HomePage extends Component {
               color="primary"
               fullWidth
               sx={{ height: "56px", width: matches ? "100%" : "auto" }}
+              onClick={this.handleSubmit}
             >
               Submit
             </Button>

@@ -6,4 +6,5 @@ class Video(models.Model):
     video_id = models.CharField(max_length=50, unique=True)
     video_title = models.CharField(max_length=100)
     video_length = models.IntegerField()
+    video_thumbnail = models.URLField()
     timestamps = models.JSONField()
