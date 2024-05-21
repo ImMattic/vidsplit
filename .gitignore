@@ -6,3 +6,4 @@ vidsplit/db.sqlite3
 **/migrations/
 **/vidpsplit/frontend/node_modules/
 node_modules/
+**/secrets/

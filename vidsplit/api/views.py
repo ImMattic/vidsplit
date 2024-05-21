@@ -2,6 +2,9 @@ from rest_framework import generics, status
 from .serializers import VideoSerializer
 from .models import Video
 from rest_framework.response import Response
+import regex as re
+import requests
+import isodate
 
 
 # Querying the Youtube API:
@@ -11,7 +14,25 @@ class Initialize(generics.ListAPIView):
     http_method_names = ["post"]
 
     def post(self, request, *args, **kwargs):
-        serializer = VideoSerializer(data=request.data)
+        initial_request = request.data
+        # Read in Youtube API key
+        with open('./secrets/youtube_api_key.txt', 'r') as file:
+            yt_api_key = file.read().strip()
+        regex_yt_pattern = '^.*(?:(?:youtu\\.be\\/|v\\/|vi\\/|u\\/\\w\\/|embed\\/|shorts\\/)|(?:(?:watch)?\\?v(?:i)?=|\\&v(?:i)?=))([^#\\&\\?]*).*'
+        video_id = re.match(regex_yt_pattern, initial_request.get("video_url")).group(1)
+        yt_api_url = f"https://www.googleapis.com/youtube/v3/videos?key={yt_api_key}&id={video_id}&part=snippet&part=contentDetails"
+        yt_api_response = requests.get(yt_api_url)
+        thumbnail = yt_api_response.json()["items"][0]["snippet"]["thumbnails"]["high"]["url"]
+        title = yt_api_response.json()["items"][0]["snippet"]["title"]
+        length = isodate.parse_duration(yt_api_response.json()["items"][0]["contentDetails"]["duration"]).total_seconds()
+        serializer = VideoSerializer(data={
+            "session_id": initial_request.get("session_id"),
+            "video_url": initial_request.get("video_url"),
+            "video_id": video_id,
+            "video_title": title,
+            "video_length": length,
+            "video_thumbnail": thumbnail,
+        })
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
