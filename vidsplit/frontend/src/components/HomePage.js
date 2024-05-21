@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import DownloadPage from "./DownloadPage";
 import {
   BrowserRouter as Router,
   Switch,

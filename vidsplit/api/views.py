@@ -5,7 +5,7 @@ from rest_framework.response import Response
 
 
 # Querying the Youtube API:
-# https://www.googleapis.com/youtube/v3/videos?key=[API_KEY]&id=[VIDEO_ID]&part=snippet
+# https://www.googleapis.com/youtube/v3/videos?key=[API_KEY]&id=[VIDEO_ID]&part=snippet&part=contentDetails
 
 class Initialize(generics.ListAPIView):
     http_method_names = ["post"]
