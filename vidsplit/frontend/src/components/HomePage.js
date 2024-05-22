@@ -115,6 +115,7 @@ export default class HomePage extends Component {
           <Grid item xs={4} sm={2} md={2} lg={1}>
             <Button
               variant="contained"
+              color="primary"
               fullWidth
               sx={{ height: "56px", width: matches ? "100%" : "auto" }}
               onClick={this.handleSubmit}
