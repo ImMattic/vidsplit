@@ -12,7 +12,6 @@ class Initialize(generics.ListAPIView):
 
     def post(self, request, *args, **kwargs):
         initial_request = request.data
-        print(initial_request)
         video_id = initial_request.get("video_id")
         # Read in Youtube API key
         with open('./secrets/youtube_api_key.txt', 'r') as file:
@@ -66,7 +65,7 @@ class Session(generics.ListAPIView):
     http_method_names = ["get"]
 
     def get(self, request, *args, **kwargs):
-        session_id = request.Get.get("session_id")
+        session_id = request.GET.get("session_id")
         if session_id is None:
             return Response({"error": "session_id parameter is required"}, status=status.HTTP_400_BAD_REQUEST)
         video = Video.objects.filter(session_id=session_id)

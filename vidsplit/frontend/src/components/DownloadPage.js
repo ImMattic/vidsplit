@@ -55,14 +55,11 @@ const DownloadPage = (props) => {
     })
       // Then fetches the session data
       .then(
-        fetch("/api/session", {
+        fetch(`/api/session?session_id=${sessionID}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            session_id: sessionID,
-          }),
         })
       )
       // Then assigns the session data to videoData
