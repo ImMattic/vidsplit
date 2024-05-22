@@ -9,11 +9,11 @@ import {
   Box,
   CssBaseline,
 } from "@mui/material";
-import { createTheme, ThemeProvider, alpha } from "@mui/material/styles";
+import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import logo from "../assets/vidsplit-logo-dark-mode.png";
-import { useTheme } from "@mui/material/styles";
 import Cookies from "js-cookie";
 
+// Defines the dark theme for the page
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -30,6 +30,7 @@ const darkTheme = createTheme({
   },
 });
 
+// Define the DownloadPage functional component
 const DownloadPage = (props) => {
   const videoId = window.location.pathname.substring(1);
   const [url] = useState(`youtube.com/watch?v=${videoId}`);
@@ -37,8 +38,8 @@ const DownloadPage = (props) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
+  // Fetch video data when the component mounts
   useEffect(() => {
-    const videoId = window.location.pathname.substring(1);
     const sessionID = uuidv4(); // Generates a new session
     const videoData = {
       session_id: sessionID,
@@ -161,4 +162,5 @@ const DownloadPage = (props) => {
   );
 };
 
+// Export the DownloadPage component
 export default DownloadPage;

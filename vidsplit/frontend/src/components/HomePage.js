@@ -1,34 +1,17 @@
 import React, { Component } from "react";
-import { v4 as uuidv4 } from "uuid";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import {
   Grid,
   Button,
-  ButtonGroup,
-  Typography,
   TextField,
-  GlobalStyles,
   useMediaQuery,
-  Box,
   CssBaseline,
 } from "@mui/material";
-import {
-  alpha,
-  createTheme,
-  styled,
-  ThemeProvider,
-} from "@mui/material/styles";
+import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import logo from "../assets/vidsplit-logo-dark-mode.png";
-import { useTheme } from "@mui/material/styles";
 import DownloadPage from "./DownloadPage";
 
+// Defines the dark theme for the page
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -45,12 +28,11 @@ const darkTheme = createTheme({
   },
 });
 
+// Defines the HomePage class component
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: "",
-      date: null,
       isValidUrl: true,
     };
   }
@@ -80,21 +62,28 @@ export default class HomePage extends Component {
   handleSubmit = () => {
     console.log("Submitted");
     console.log(this.state.url);
+    // Checks if the URL is a valid Youtube URL
     if (this.validateYoutubeURL(this.state.url)) {
       const videoID = this.extractVideoID(this.state.url);
       // Redirects to the download page
       window.location.href = window.location.origin + "/" + videoID;
     } else {
+      // If the URL is invalid, sets the state to false
       this.setState({ isValidUrl: false });
       console.log("Invalid Youtube URL");
     }
   };
 
+  // Renders the home page to the user
   renderHomePage() {
+    // Uses MUI theme to style the page
     const theme = useTheme();
+    // Checks if the screen size is less than 600px (sm breakpoint)
     const matches = useMediaQuery(theme.breakpoints.down("sm"));
     return (
+      // Uses the dark theme
       <ThemeProvider theme={darkTheme}>
+        {/* Uses styles from the theme for CSS */}
         <CssBaseline />
         <div>
           <a href="/" className="toplogoBar">
@@ -143,8 +132,10 @@ export default class HomePage extends Component {
     );
   }
 
+  // Sets the HomePageComponent to the renderHomePage function
   HomePageComponent = () => this.renderHomePage();
 
+  // Routes the user to various pages based on the URL
   render() {
     return (
       <Router>
