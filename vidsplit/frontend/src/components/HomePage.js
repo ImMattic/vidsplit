@@ -17,6 +17,7 @@ import {
   GlobalStyles,
   useMediaQuery,
   Box,
+  CssBaseline,
 } from "@mui/material";
 import {
   alpha,
@@ -37,6 +38,10 @@ const darkTheme = createTheme({
     },
     secondary: {
       main: "#77c3dc",
+    },
+    background: {
+      default: "#141f2b",
+      paper: "#1d2d3e",
     },
   },
 });
@@ -77,6 +82,7 @@ export default class HomePage extends Component {
     const matches = useMediaQuery(theme.breakpoints.down("sm"));
     return (
       <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
         <div>
           <a href="/" className="toplogoBar">
             <img
@@ -109,7 +115,6 @@ export default class HomePage extends Component {
           <Grid item xs={4} sm={2} md={2} lg={1}>
             <Button
               variant="contained"
-              color="primary"
               fullWidth
               sx={{ height: "56px", width: matches ? "100%" : "auto" }}
               onClick={this.handleSubmit}

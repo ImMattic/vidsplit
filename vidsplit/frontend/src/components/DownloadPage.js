@@ -17,13 +17,9 @@ import {
   GlobalStyles,
   useMediaQuery,
   Box,
+  CssBaseline,
 } from "@mui/material";
-import {
-  alpha,
-  createTheme,
-  styled,
-  ThemeProvider,
-} from "@mui/material/styles";
+import { createTheme, ThemeProvider, alpha } from "@mui/material/styles";
 import logo from "../assets/vidsplit-logo-dark-mode.png";
 import { useTheme } from "@mui/material/styles";
 
@@ -35,6 +31,10 @@ const darkTheme = createTheme({
     },
     secondary: {
       main: "#77c3dc",
+    },
+    background: {
+      default: "#141f2b",
+      paper: "#1d2d3e",
     },
   },
 });
@@ -83,6 +83,7 @@ const DownloadPage = (props) => {
 
   return (
     <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
       <div>
         <a href="/" className="toplogoBar">
           <img
@@ -125,14 +126,42 @@ const DownloadPage = (props) => {
           </Button>
         </Grid>
       </Grid>
-      <Grid>
-        <Grid item xs={12} sm={12} md={6} lg={3}>
-          <img src={videoData.video_thumbnail}></img>
-        </Grid>
-        <Grid item>
-          <Typography variant="h4">{videoData.video_title}</Typography>
-        </Grid>
-      </Grid>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "2%",
+        }}
+      >
+        <Box
+          sx={{
+            bgcolor: "background.paper",
+            m: 2,
+            p: 2,
+            borderRadius: 2,
+            maxWidth: "50%",
+          }}
+        >
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={4}>
+              <img
+                src={videoData.video_thumbnail}
+                alt="Video Thumbnail"
+                style={{ width: "100%", height: "auto" }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <Typography variant="h4" color="textPrimary">
+                {videoData.video_title}
+              </Typography>
+              <Typography variant="subtitle1" color="textPrimary">
+                Duration: {videoData.video_length} secs
+              </Typography>
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
     </ThemeProvider>
   );
 };

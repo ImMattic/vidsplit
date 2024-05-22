@@ -19,7 +19,7 @@ class Initialize(generics.ListAPIView):
             yt_api_key = file.read().strip()
         yt_api_url = f"https://www.googleapis.com/youtube/v3/videos?key={yt_api_key}&id={video_id}&part=snippet&part=contentDetails"
         yt_api_response = requests.get(yt_api_url)
-        thumbnail = yt_api_response.json()["items"][0]["snippet"]["thumbnails"]["high"]["url"]
+        thumbnail = yt_api_response.json()["items"][0]["snippet"]["thumbnails"]["maxres"]["url"]
         title = yt_api_response.json()["items"][0]["snippet"]["title"]
         length = isodate.parse_duration(yt_api_response.json()["items"][0]["contentDetails"]["duration"]).total_seconds()
         serializer = VideoSerializer(data={
