@@ -51,15 +51,24 @@ export default class HomePage extends Component {
     this.state = {
       url: "",
       date: null,
+      isValidUrl: true,
     };
   }
 
   // Parses the video ID from the URL
   extractVideoID = (url) => {
-    const regex =
+    const extract_regex =
       "^.*(?:(?:youtu\\.be\\/|v\\/|vi\\/|u\\/\\w\\/|embed\\/|shorts\\/)|(?:(?:watch)?\\?v(?:i)?=|\\&v(?:i)?=))([^#\\&\\?]*).*";
-    const match = url.match(regex);
+    const match = url.match(extract_regex);
     return match && match[1].length === 11 ? match[1] : false;
+  };
+
+  // Returns true or false if the URL is a valid Youtube URL
+  validateYoutubeURL = (url) => {
+    const validate_regex = RegExp(
+      "^(http(s)?:\\/\\/)?((w){3}.)?youtu(be|.be)?(\\.com)?\\/(watch\\?v=|shorts\\/|playlist\\?list=)?([a-zA-Z0-9_-]{11})?$"
+    );
+    return validate_regex.test(url);
   };
 
   // Passes the TextField URL input to the state
@@ -71,9 +80,14 @@ export default class HomePage extends Component {
   handleSubmit = () => {
     console.log("Submitted");
     console.log(this.state.url);
-    const videoID = this.extractVideoID(this.state.url);
-    // Redirects to the download page
-    window.location.href = window.location.origin + "/" + videoID;
+    if (this.validateYoutubeURL(this.state.url)) {
+      const videoID = this.extractVideoID(this.state.url);
+      // Redirects to the download page
+      window.location.href = window.location.origin + "/" + videoID;
+    } else {
+      this.setState({ isValidUrl: false });
+      console.log("Invalid Youtube URL");
+    }
   };
 
   renderHomePage() {
@@ -108,6 +122,8 @@ export default class HomePage extends Component {
               color="secondary"
               size="large"
               fullWidth
+              error={!this.state.isValidUrl}
+              helperText={!this.state.isValidUrl && "Invalid Youtube URL"}
               onChange={this.handleInputChange}
             />
           </Grid>
