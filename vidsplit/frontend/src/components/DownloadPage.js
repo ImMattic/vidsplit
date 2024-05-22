@@ -1,20 +1,10 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-  Routes,
-} from "react-router-dom";
 import {
   Grid,
   Button,
-  ButtonGroup,
   Typography,
   TextField,
-  GlobalStyles,
   useMediaQuery,
   Box,
   CssBaseline,
@@ -22,6 +12,7 @@ import {
 import { createTheme, ThemeProvider, alpha } from "@mui/material/styles";
 import logo from "../assets/vidsplit-logo-dark-mode.png";
 import { useTheme } from "@mui/material/styles";
+import Cookies from "js-cookie";
 
 const darkTheme = createTheme({
   palette: {
@@ -78,6 +69,10 @@ const DownloadPage = (props) => {
       .then((data) => {
         console.log(data);
         setVideoData(data);
+      })
+      .then(() => {
+        // Save session ID as a cookie
+        Cookies.set("sessionID", sessionID);
       });
   }, []);
 

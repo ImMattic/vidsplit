@@ -28,7 +28,6 @@ import {
 import logo from "../assets/vidsplit-logo-dark-mode.png";
 import { useTheme } from "@mui/material/styles";
 import DownloadPage from "./DownloadPage";
-import Cookies from "js-cookie";
 
 const darkTheme = createTheme({
   palette: {
