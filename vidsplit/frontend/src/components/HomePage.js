@@ -110,7 +110,7 @@ export default class HomePage extends Component {
           container
           direction="row"
           justifyContent="center"
-          alignItems="center"
+          alignItems="flex-start"
           spacing={2}
           marginTop={matches ? "20%" : "5%"}
           sx={{ padding: "0 10%" }}
@@ -123,7 +123,7 @@ export default class HomePage extends Component {
               size="large"
               fullWidth
               error={!this.state.isValidUrl}
-              helperText={!this.state.isValidUrl && "Invalid Youtube URL"}
+              helperText={this.state.isValidUrl ? " " : "Invalid Youtube URL"}
               onChange={this.handleInputChange}
             />
           </Grid>
