@@ -1,4 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 import {
   BrowserRouter as Router,
   Switch,
@@ -40,10 +41,45 @@ const darkTheme = createTheme({
 
 const DownloadPage = (props) => {
   const videoId = window.location.pathname.substring(1);
-  const [url, setUrl] = useState(`youtube.com/watch?v=${videoId}`);
-  const [date, setDate] = useState(null);
+  const [url] = useState(`youtube.com/watch?v=${videoId}`);
+  const [videoData, setVideoData] = useState({});
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
+
+  useEffect(() => {
+    const videoId = window.location.pathname.substring(1);
+    const sessionID = uuidv4(); // Generates a new session
+    const videoData = {
+      session_id: sessionID,
+      video_id: videoId,
+    };
+    // Initalizes the session
+    fetch("api/initialize", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(videoData),
+    })
+      // Then fetches the session data
+      .then(
+        fetch("/api/session", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            session_id: sessionID,
+          }),
+        })
+      )
+      // Then assigns the session data to videoData
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setVideoData(data);
+      });
+  }, []);
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -87,6 +123,14 @@ const DownloadPage = (props) => {
           >
             Submit
           </Button>
+        </Grid>
+      </Grid>
+      <Grid>
+        <Grid item xs={12} sm={12} md={6} lg={3}>
+          <img src={videoData.video_thumbnail}></img>
+        </Grid>
+        <Grid item>
+          <Typography variant="h4">{videoData.video_title}</Typography>
         </Grid>
       </Grid>
     </ThemeProvider>

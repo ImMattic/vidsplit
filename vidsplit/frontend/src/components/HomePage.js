@@ -67,31 +67,9 @@ export default class HomePage extends Component {
   handleSubmit = () => {
     console.log("Submitted");
     console.log(this.state.url);
-    const sessionID = uuidv4(); // Generates a new session
-    const videoData = {
-      session_id: sessionID,
-      video_url: this.state.url,
-      video_id: this.extractVideoID(this.state.url),
-    };
-    fetch("api/initialize", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(videoData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-        this.setState({ date: data.date });
-        // Redirects to the download page
-        window.location.href =
-          window.location.origin + "/" + videoData.video_id;
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-    Cookies.set("session_id", sessionID);
+    const videoID = this.extractVideoID(this.state.url);
+    // Redirects to the download page
+    window.location.href = window.location.origin + "/" + videoID;
   };
 
   renderHomePage() {

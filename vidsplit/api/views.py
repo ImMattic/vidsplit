@@ -2,24 +2,21 @@ from rest_framework import generics, status
 from .serializers import VideoSerializer
 from .models import Video
 from rest_framework.response import Response
-import regex as re
 import requests
 import isodate
 
 
-# Querying the Youtube API:
-# https://www.googleapis.com/youtube/v3/videos?key=[API_KEY]&id=[VIDEO_ID]&part=snippet&part=contentDetails
-
+# Endpoint for initializing the video content and session
 class Initialize(generics.ListAPIView):
     http_method_names = ["post"]
 
     def post(self, request, *args, **kwargs):
         initial_request = request.data
+        print(initial_request)
+        video_id = initial_request.get("video_id")
         # Read in Youtube API key
         with open('./secrets/youtube_api_key.txt', 'r') as file:
             yt_api_key = file.read().strip()
-        regex_yt_pattern = '^.*(?:(?:youtu\\.be\\/|v\\/|vi\\/|u\\/\\w\\/|embed\\/|shorts\\/)|(?:(?:watch)?\\?v(?:i)?=|\\&v(?:i)?=))([^#\\&\\?]*).*'
-        video_id = re.match(regex_yt_pattern, initial_request.get("video_url")).group(1)
         yt_api_url = f"https://www.googleapis.com/youtube/v3/videos?key={yt_api_key}&id={video_id}&part=snippet&part=contentDetails"
         yt_api_response = requests.get(yt_api_url)
         thumbnail = yt_api_response.json()["items"][0]["snippet"]["thumbnails"]["high"]["url"]
@@ -27,7 +24,6 @@ class Initialize(generics.ListAPIView):
         length = isodate.parse_duration(yt_api_response.json()["items"][0]["contentDetails"]["duration"]).total_seconds()
         serializer = VideoSerializer(data={
             "session_id": initial_request.get("session_id"),
-            "video_url": initial_request.get("video_url"),
             "video_id": initial_request.get("video_id"),
             "video_title": title,
             "video_length": length,
@@ -40,6 +36,7 @@ class Initialize(generics.ListAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# Endpoint for generating the video content
 class Generate(generics.ListAPIView):
     http_method_names = ["put"]
 
@@ -53,6 +50,7 @@ class Generate(generics.ListAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# Endpoint for downloading the video
 class Download(generics.ListAPIView):
     http_method_names = ["get"]
 
@@ -63,10 +61,14 @@ class Download(generics.ListAPIView):
         return Response(serializer.data)
 
 
+# Endpoint for gathering information about the session
 class Session(generics.ListAPIView):
     http_method_names = ["get"]
 
     def get(self, request, *args, **kwargs):
-        video = Video.objects.get(session_id=request.session.session_key)
-        serializer = VideoSerializer(video)
+        session_id = request.Get.get("session_id")
+        if session_id is None:
+            return Response({"error": "session_id parameter is required"}, status=status.HTTP_400_BAD_REQUEST)
+        video = Video.objects.filter(session_id=session_id)
+        serializer = VideoSerializer(video, many=True)
         return Response(serializer.data)
