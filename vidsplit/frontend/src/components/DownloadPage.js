@@ -61,7 +61,7 @@ const DownloadPage = (props) => {
       timestamps: timestamps,
     };
     fetch("api/generate", {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -70,7 +70,7 @@ const DownloadPage = (props) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        window.location.href = `/download/${data.session_id}`;
+        // window.location.href = `/download/${data.session_id}`;
       });
   };
 
@@ -91,7 +91,7 @@ const DownloadPage = (props) => {
     return result;
   }
 
-  // Fetch video data when the component mounts
+  // Fetch video data when the page loads
   useEffect(() => {
     const sessionID = uuidv4(); // Generates a new session
     const videoData = {
