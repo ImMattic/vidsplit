@@ -10,8 +10,10 @@ import {
   CssBaseline,
 } from "@mui/material";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
+import { TimeField, LocalizationProvider } from "@mui/x-date-pickers";
 import logo from "../assets/vidsplit-logo-dark-mode.png";
 import Cookies from "js-cookie";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 // Defines the dark theme for the page
 const darkTheme = createTheme({
@@ -32,11 +34,27 @@ const darkTheme = createTheme({
 
 // Define the DownloadPage functional component
 const DownloadPage = (props) => {
+  const [timestamps, setTimestamps] = useState([{ start: null, end: null }]);
   const videoId = window.location.pathname.substring(1);
   const [url] = useState(`youtube.com/watch?v=${videoId}`);
   const [videoData, setVideoData] = useState({});
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
+
+  // Timestamp handling functions
+  const addTimestamp = () => {
+    if (timestamps.length < 5) {
+      setTimestamps([...timestamps, { start: null, end: null }]);
+    }
+  };
+
+  const handleTimeChange = (index, type, time) => {
+    const newTimestamps = [...timestamps];
+    newTimestamps[index][type] = time;
+    setTimestamps(newTimestamps);
+  };
+
+  const sendTimestamps = () => {};
 
   // Helper function for convering seconds to HH:MM:SS format
   function formatDuration(duration) {
@@ -172,6 +190,68 @@ const DownloadPage = (props) => {
           </Grid>
         </Box>
       </Box>
+      {timestamps.map((timestamp, index) => (
+        <Box
+          key={index}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "1%",
+            margin: "0 auto",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <TimeField
+                label="Start Time"
+                format="HH:mm:ss"
+                value={timestamp.start}
+                onChange={(time) => handleTimeChange(index, "start", time)}
+                sx={{ marginRight: "2%" }}
+              />
+              <TimeField
+                label="End Time"
+                format="HH:mm:ss"
+                value={timestamp.end}
+                onChange={(time) => handleTimeChange(index, "end", time)}
+              />
+            </LocalizationProvider>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "end",
+              alignItems: "end",
+              marginTop: "2%",
+            }}
+          >
+            {timestamps.length - 1 === index && timestamps.length < 5 && (
+              <Button onClick={addTimestamp}>+ Add</Button>
+            )}{" "}
+          </Box>
+        </Box>
+      ))}
+      <Button
+        sx={{
+          display: "block",
+          margin: "0 auto",
+          marginTop: "1%",
+        }}
+        variant="contained"
+        color="primary"
+        onClick={sendTimestamps}
+      >
+        Generate Video
+      </Button>
     </ThemeProvider>
   );
 };
