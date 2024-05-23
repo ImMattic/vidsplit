@@ -38,6 +38,23 @@ const DownloadPage = (props) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
+  // Helper function for convering seconds to HH:MM:SS format
+  function formatDuration(duration) {
+    const hours = Math.floor(duration / 3600);
+    const minutes = Math.floor((duration % 3600) / 60);
+    const seconds = duration - hours * 3600 - minutes * 60;
+
+    let result = "";
+    if (hours > 0) {
+      result += hours + "h ";
+    }
+    if (minutes > 0) {
+      result += minutes + "m ";
+    }
+    result += seconds + "s";
+    return result;
+  }
+
   // Fetch video data when the component mounts
   useEffect(() => {
     const sessionID = uuidv4(); // Generates a new session
@@ -141,7 +158,7 @@ const DownloadPage = (props) => {
               <img
                 src={videoData.video_thumbnail}
                 alt="Video Thumbnail"
-                style={{ width: "100%", height: "auto" }}
+                style={{ width: "100%", height: "auto", borderRadius: "15px" }}
               />
             </Grid>
             <Grid item xs={12} sm={8}>
@@ -149,7 +166,7 @@ const DownloadPage = (props) => {
                 {videoData.video_title}
               </Typography>
               <Typography variant="subtitle1" color="textPrimary">
-                Duration: {videoData.video_length} secs
+                Duration: {formatDuration(videoData.video_length)}
               </Typography>
             </Grid>
           </Grid>
