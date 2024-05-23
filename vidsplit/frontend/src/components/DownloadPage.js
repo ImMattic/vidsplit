@@ -54,7 +54,25 @@ const DownloadPage = (props) => {
     setTimestamps(newTimestamps);
   };
 
-  const sendTimestamps = () => {};
+  const sendTimestamps = () => {
+    const sessionID = Cookies.get("sessionID");
+    const timestampData = {
+      session_id: sessionID,
+      timestamps: timestamps,
+    };
+    fetch("api/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(timestampData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        window.location.href = `/download/${data.session_id}`;
+      });
+  };
 
   // Helper function for convering seconds to HH:MM:SS format
   function formatDuration(duration) {
@@ -146,7 +164,7 @@ const DownloadPage = (props) => {
           <Button
             variant="contained"
             color="primary"
-            fullWidthf
+            fullWidth
             sx={{ height: "56px", width: matches ? "100%" : "auto" }}
             disabled
           >
@@ -231,7 +249,7 @@ const DownloadPage = (props) => {
               display: "flex",
               justifyContent: "end",
               alignItems: "end",
-              marginTop: "2%",
+              marginTop: "1%",
             }}
           >
             {timestamps.length - 1 === index && timestamps.length < 5 && (
