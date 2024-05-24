@@ -34,6 +34,7 @@ export default class HomePage extends Component {
     super(props);
     this.state = {
       isValidUrl: true,
+      generating: false,
     };
   }
 

@@ -4,6 +4,26 @@ from .models import Video
 from rest_framework.response import Response
 import requests
 import isodate
+import re
+
+
+# Function to process timestamps to a format that can be used by youtube-dl
+def process_timestamps(timestamp_dict):
+    start_time = timestamp_dict["start"]
+    end_time = timestamp_dict["end"]
+    hour_regex = "(?<=T)\d{2}"
+    mins_regex = "(?<=:)\d{2}"
+    secs_regex = "(?<=:\d{2}:)\d{2}"
+
+    st_hours_to_secs = (int(re.search(hour_regex, start_time).group()) - 5) * 3600
+    st_mins_to_secs = int(re.search(mins_regex, start_time).group(0)) * 60
+    st_secs = int(re.search(secs_regex, start_time).group())
+
+    et_hours_to_secs = (int(re.search(hour_regex, end_time).group()) - 5) * 3600
+    et_mins_to_secs = int(re.search(mins_regex, end_time).group(0)) * 60
+    et_secs = int(re.search(secs_regex, end_time).group())
+
+    return [(st_hours_to_secs + st_mins_to_secs + st_secs), (et_hours_to_secs + et_mins_to_secs + et_secs)]
 
 
 # Endpoint for initializing the video content and session
@@ -47,12 +67,14 @@ class Generate(generics.ListAPIView):
 
     def put(self, request, *args, **kwargs):
         session_id = request.data.get("session_id")
-        print(session_id)
+        timestamps = request.data.get("timestamps")
+        converted_timestamps = []
+        for timestamp in timestamps:
+            converted_timestamps.append(process_timestamps(timestamp))
         video = Video.objects.get(session_id=session_id)
-        print(video)
-        return Response(
-            {"message": "Video content generated"}, status=status.HTTP_200_OK
-        )
+        video.timestamps = converted_timestamps
+        video.save()
+        return Response({"message": "Video content generated successfully"}, status=status.HTTP_200_OK)
 
 
 # Endpoint for downloading the video

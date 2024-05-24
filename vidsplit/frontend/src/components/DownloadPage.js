@@ -74,7 +74,7 @@ const DownloadPage = (props) => {
       });
   };
 
-  // Helper function for convering seconds to HH:MM:SS format
+  // Helper function for converting seconds to HH:MM:SS format
   function formatDuration(duration) {
     const hours = Math.floor(duration / 3600);
     const minutes = Math.floor((duration % 3600) / 60);
