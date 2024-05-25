@@ -8,6 +8,7 @@ import {
   useMediaQuery,
   Box,
   CssBaseline,
+  CircularProgress,
 } from "@mui/material";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import { TimeField, LocalizationProvider } from "@mui/x-date-pickers";
@@ -40,6 +41,7 @@ const DownloadPage = (props) => {
   const [videoData, setVideoData] = useState({});
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
+  const [loading, setLoading] = useState(false);
 
   // Timestamp handling functions
   const addTimestamp = () => {
@@ -56,6 +58,7 @@ const DownloadPage = (props) => {
 
   const sendTimestamps = () => {
     const sessionID = Cookies.get("sessionID");
+    setLoading(true);
     const timestampData = {
       session_id: sessionID,
       timestamps: timestamps,
@@ -78,6 +81,7 @@ const DownloadPage = (props) => {
   const downloadVideo = () => {
     const sessionID = Cookies.get("sessionID");
     const video_id = videoId;
+    setLoading(false);
     fetch(`/api/download?session_id=${sessionID}&video_id=${video_id}`, {
       method: "GET",
     })
@@ -285,30 +289,34 @@ const DownloadPage = (props) => {
           </Box>
         </Box>
       ))}
-      <Button
-        sx={{
-          display: "block",
-          margin: "0 auto",
-          marginTop: "1%",
-        }}
-        variant="contained"
-        color="primary"
-        onClick={sendTimestamps}
-      >
-        Generate Video
-      </Button>
-      {/* <Button
-        sx={{
-          display: "block",
-          margin: "0 auto",
-          marginTop: "1%",
-        }}
-        variant="contained"
-        color="primary"
-        onClick={downloadVideo}
-      >
-        Download
-      </Button> */}
+      <Box sx={{ m: 1, position: "relative" }}>
+        <Button
+          sx={{
+            display: "block",
+            margin: "0 auto",
+            marginTop: "1%",
+          }}
+          variant="contained"
+          color="primary"
+          disabled={loading}
+          onClick={sendTimestamps}
+        >
+          Generate Video
+        </Button>
+        {loading && (
+          <CircularProgress
+            color="primary"
+            size={24}
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              marginTop: "0px",
+              marginLeft: "-12px",
+            }}
+          />
+        )}
+      </Box>
     </ThemeProvider>
   );
 };
