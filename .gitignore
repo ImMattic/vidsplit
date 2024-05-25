@@ -13,3 +13,4 @@ node_modules/
 **/.env
 /whitelists/*
 !/whitelists/.gitignore
+sqlite3.exe
