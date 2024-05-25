@@ -5,6 +5,10 @@ from rest_framework.response import Response
 import requests
 import isodate
 import re
+import yt_dlp
+from moviepy.editor import VideoFileClip, concatenate_videoclips
+from django.http import FileResponse
+import os
 
 
 # Function to process timestamps to a format that can be used by youtube-dl
@@ -74,6 +78,30 @@ class Generate(generics.ListAPIView):
         video = Video.objects.get(session_id=session_id)
         video.timestamps = converted_timestamps
         video.save()
+        ydl_opts = {
+            'format': 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[height<=1080][ext=mp4]/best',
+            'outtmpl': f'./temp/{video.session_id}/{video.video_id}.%(ext)s',
+            'verbose': False,
+        }
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([f"https://www.youtube.com/watch?v={video.video_id}"])
+
+        clip = VideoFileClip(f"./temp/{video.session_id}/{video.video_id}.mp4")
+        clips = []
+
+        for start, end in video.timestamps:
+            subclip = clip.subclip(start, end)
+            clips.append(subclip)
+        
+        final_clip = concatenate_videoclips(clips)
+
+        final_clip.write_videofile(f"./temp/{video.session_id}/{video.video_id}_trimmed.mp4")
+        # (
+        #     ffmpeg
+        #     .input(f"./temp/{video.session_id}/{video.video_id}.mp4", ss=video.timestamps[0][0], to=video.timestamps[0][1])
+        #     .output(f"./temp/{video.session_id}/{video.video_id}_trimmed.mp4")
+        #     .run()
+        # )
         return Response({"message": "Video content generated successfully"}, status=status.HTTP_200_OK)
 
 
@@ -82,12 +110,27 @@ class Download(generics.ListAPIView):
     http_method_names = ["get"]
 
     def get(self, request, *args, **kwargs):
-        video_id = self.kwargs.get("video_id")
-        video = Video.objects.get(
-            video_id=video_id, session_id=request.session.session_key
-        )
-        serializer = VideoSerializer(video)
-        return Response(serializer.data)
+        session_id = request.GET.get("session_id")
+        video_id = request.GET.get("video_id")
+
+        if session_id is None or video_id is None:
+            return Response(
+                {"error": "session_id and video_id parameters are required"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        file_path = f"./temp/{session_id}/{video_id}_trimmed.mp4"
+
+        if not os.path.exists(file_path):
+            return Response(
+                {"error": "File not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        response = FileResponse(open(file_path, 'rb'))
+        response['Content-Disposition'] = f'attachment; filename="{video_id}_trimmed.mp4"'
+
+        return response
 
 
 # Endpoint for gathering information about the session

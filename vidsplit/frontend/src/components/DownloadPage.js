@@ -69,9 +69,36 @@ const DownloadPage = (props) => {
     })
       .then((response) => response.json())
       .then((data) => {
+        downloadVideo();
         console.log(data);
         // window.location.href = `/download/${data.session_id}`;
       });
+  };
+
+  const downloadVideo = () => {
+    const sessionID = Cookies.get("sessionID");
+    const video_id = videoId;
+    fetch(`/api/download?session_id=${sessionID}&video_id=${video_id}`, {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.blob();
+      })
+      .then((blob) => {
+        // Create blob link to download
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.style.display = "none";
+        a.href = url;
+        a.download = `${video_id}_trimmed.mp4`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((e) => console.error(e));
   };
 
   // Helper function for converting seconds to HH:MM:SS format
@@ -270,6 +297,18 @@ const DownloadPage = (props) => {
       >
         Generate Video
       </Button>
+      {/* <Button
+        sx={{
+          display: "block",
+          margin: "0 auto",
+          marginTop: "1%",
+        }}
+        variant="contained"
+        color="primary"
+        onClick={downloadVideo}
+      >
+        Download
+      </Button> */}
     </ThemeProvider>
   );
 };
