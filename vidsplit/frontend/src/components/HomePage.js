@@ -67,7 +67,7 @@ export default class HomePage extends Component {
     if (this.validateYoutubeURL(this.state.url)) {
       const videoID = this.extractVideoID(this.state.url);
       // Redirects to the download page
-      window.location.href = window.location.origin + "/" + videoID;
+      window.location.href = window.location.origin + "/watch?v=" + videoID;
     } else {
       // If the URL is invalid, sets the state to false
       this.setState({ isValidUrl: false });

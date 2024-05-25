@@ -147,3 +147,4 @@ class Session(generics.ListAPIView):
         video = Video.objects.filter(session_id=session_id)
         serializer = VideoSerializer(video, many=True)
         return Response(serializer.data)
+

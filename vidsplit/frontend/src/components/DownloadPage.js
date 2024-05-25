@@ -36,7 +36,8 @@ const darkTheme = createTheme({
 // Define the DownloadPage functional component
 const DownloadPage = (props) => {
   const [timestamps, setTimestamps] = useState([{ start: null, end: null }]);
-  const videoId = window.location.pathname.substring(1);
+  const urlParams = new URLSearchParams(window.location.search);
+  const videoId = urlParams.get("v");
   const [url] = useState(`youtube.com/watch?v=${videoId}`);
   const [videoData, setVideoData] = useState({});
   const theme = useTheme();
