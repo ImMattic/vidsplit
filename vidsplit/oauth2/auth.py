@@ -44,7 +44,8 @@ class DiscordAuthenticationBackend(BaseBackend):
                 public_flags=user["public_flags"],
                 flags=user["flags"],
                 locale=user["locale"],
-                mfa_enabled=user["mfa_enabled"]
+                mfa_enabled=user["mfa_enabled"],
+                has_access=user["has_access"],
             )
             print(new_user)
             return new_user

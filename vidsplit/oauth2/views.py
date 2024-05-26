@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse, HttpRequest
+from django.http import JsonResponse, HttpRequest, HttpResponse
 from django.contrib.auth.decorators import login_required
 from rest_framework import generics, status
 from .serializers import UserSerializer
@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 import os
 from django.contrib.auth import authenticate, login
 
-auth_url_discord = "https://discord.com/oauth2/authorize?client_id=1243943397082009774&response_type=code&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Foauth2%2Fdiscord%2Fredirect&scope=identify"
+auth_url_discord = "https://discord.com/oauth2/authorize?client_id=1243943397082009774&response_type=code&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Foauth2%2Fdiscord%2Fredirect&scope=guilds+identify"
 
 # Load environment variables
 load_dotenv()
@@ -34,7 +34,20 @@ def exchange_code(code: str):
     response = requests.get("https://discord.com/api/v10/users/@me", headers={
         'Authorization': 'Bearer %s' % access_token
     })
-    return response.json()
+    user = response.json()
+    user["has_access"] = check_user(access_token)
+    return user
+
+
+def check_user(access_token: str):
+    allowed_guilds = os.getenv("AllowedGuilds").split(",")
+    response = requests.get("https://discord.com/api/v10/users/@me/guilds", headers={
+        'Authorization': 'Bearer %s' % access_token})
+    guilds = response.json()
+    for guild in guilds:
+        if guild["id"] in allowed_guilds:
+            return True
+    return False
 
 
 @login_required(login_url="/login")
@@ -58,11 +71,8 @@ class Discord_Redirect(generics.ListAPIView):
         # auth_session = request.GET.get("auth_session")
         code = request.GET.get("code")
         user = exchange_code(code)
-        print("USER: ", user)
         discord_user = authenticate(request, user=user)
-        print("DISCORD USER: ", discord_user)
         discord_user = list(discord_user).pop()
-        print("DISCORD USER: ", discord_user)
         login(request, discord_user)
-        response = redirect("http://127.0.0.1:8000/")
+        response = redirect("http://127.0.0.1:8000")
         return response
