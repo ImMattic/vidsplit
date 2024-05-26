@@ -15,6 +15,7 @@ import { TimeField, LocalizationProvider } from "@mui/x-date-pickers";
 import logo from "../assets/vidsplit-logo-dark-mode.png";
 import Cookies from "js-cookie";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { nanoid } from "nanoid";
 
 // Defines the dark theme for the page
 const darkTheme = createTheme({
@@ -135,6 +136,7 @@ const DownloadPage = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "X-CSRFToken": "auth_csrftoken",
       },
       body: JSON.stringify(videoData),
     })

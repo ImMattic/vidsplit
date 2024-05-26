@@ -9,6 +9,8 @@ import yt_dlp
 from moviepy.editor import VideoFileClip, concatenate_videoclips
 from django.http import FileResponse
 import os
+# from django.views.decorators.csrf import csrf_exempt
+# from django.utils.decorators import method_decorator
 
 
 # Function to process timestamps to a format that can be used by youtube-dl
@@ -30,6 +32,7 @@ def process_timestamps(timestamp_dict):
     return [(st_hours_to_secs + st_mins_to_secs + st_secs), (et_hours_to_secs + et_mins_to_secs + et_secs)]
 
 
+# @method_decorator(csrf_exempt, name="dispatch")
 # Endpoint for initializing the video content and session
 class Initialize(generics.ListAPIView):
     http_method_names = ["post"]

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpRequest
 from django.contrib.auth.decorators import login_required
 from rest_framework import generics, status
 from .serializers import UserSerializer
@@ -8,6 +8,7 @@ from rest_framework.response import Response
 import requests
 from dotenv import load_dotenv
 import os
+from django.contrib.auth import authenticate, login
 
 auth_url_discord = "https://discord.com/oauth2/authorize?client_id=1243943397082009774&response_type=code&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Foauth2%2Fdiscord%2Fredirect&scope=identify"
 
@@ -36,23 +37,9 @@ def exchange_code(code: str):
     return response.json()
 
 
-# Create your views here.
-class Home(generics.ListAPIView):
-    http_method_names = ["get"]
-
-    def get(self, request, *args, **kwargs):
-        # auth_session = request.GET.get("auth_session")
-        response = JsonResponse({"message": "Hello world!"})
-        return response
-
-
-class Discord(generics.ListAPIView):
-    http_method_names = ["get"]
-
-    def get(self, request, *args, **kwargs):
-        # auth_session = request.GET.get("auth_session")
-        response = JsonResponse({"message": "Discord endpoint hit!"})
-        return response
+@login_required(login_url="/login")
+def discord_getuser(request: HttpRequest):
+    return JsonResponse({"msg": "Authenticated"})
 
 
 class Discord_Login(generics.ListAPIView):
@@ -71,4 +58,11 @@ class Discord_Redirect(generics.ListAPIView):
         # auth_session = request.GET.get("auth_session")
         code = request.GET.get("code")
         user = exchange_code(code)
-        return JsonResponse({"user": user["username"]})
+        print("USER: ", user)
+        discord_user = authenticate(request, user=user)
+        print("DISCORD USER: ", discord_user)
+        discord_user = list(discord_user).pop()
+        print("DISCORD USER: ", discord_user)
+        login(request, discord_user)
+        response = redirect("http://127.0.0.1:8000/")
+        return response

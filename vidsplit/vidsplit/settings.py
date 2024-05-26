@@ -58,6 +58,10 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASES': ['rest_framework.permission.AllowAny']}
 
+AUTHENTICATION_BACKENDS = [
+    'oauth2.auth.DiscordAuthenticationBackend',
+]
+
 CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = "vidsplit.urls"
@@ -79,6 +83,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "vidsplit.wsgi.application"
+
+SESSION_COOKIE_NAME = "auth_sessionid"
+
+CSRF_COOKIE_NAME = "auth_csrftoken"
 
 
 # Database
