@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 from rest_framework import generics, status
 from .serializers import UserSerializer
 from .models import User

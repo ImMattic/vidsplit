@@ -10,6 +10,7 @@ import {
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import logo from "../assets/vidsplit-logo-dark-mode.png";
 import DownloadPage from "./DownloadPage";
+import LoginPage from "./LoginPage";
 
 // Defines the dark theme for the page
 const darkTheme = createTheme({
@@ -143,6 +144,7 @@ export default class HomePage extends Component {
         <Routes>
           <Route path="" element={<this.HomePageComponent />} />
           <Route path="/:videoID" element={<DownloadPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </Router>
     );
