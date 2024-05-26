@@ -45,7 +45,7 @@ Main tutorial being used: https://www.youtube.com/watch?v=JD-age0BPVo&list=PLzMc
 - SQLite
 
 ### Authentication
-- Firebase Authentication
+- OAuth2
 
 # Logic
 ![Logic diagram](https://github.com/ImMattic/vidsplit/blob/dev/assets/VidSplit-backend-logic.png)
