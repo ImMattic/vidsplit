@@ -1,9 +1,7 @@
-from django.shortcuts import render, redirect
-from django.http import JsonResponse, HttpRequest, HttpResponse
+from django.shortcuts import redirect
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from rest_framework import generics
-from .models import User
-from rest_framework.response import Response
 import requests
 from dotenv import load_dotenv
 import os
