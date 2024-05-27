@@ -106,7 +106,28 @@ const DownloadPage = (props) => {
         a.click();
         window.URL.revokeObjectURL(url);
       })
-      .catch((e) => console.error(e));
+      // .then(() => {
+      //   // Start a new promise chain to fetch /api/delete
+      //   return fetch(`/api/delete?session_id=${sessionID}`, {
+      //     method: "DELETE",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       "X-CSRFToken": csrftoken,
+      //     },
+      //     body: JSON.stringify({
+      //       session_id: sessionID,
+      //       video_id: video_id,
+      //     }),
+      //   });
+      // })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   // Helper function for converting seconds to HH:MM:SS format

@@ -9,6 +9,8 @@ import yt_dlp
 from moviepy.editor import VideoFileClip, concatenate_videoclips
 from django.http import FileResponse
 import os
+import shutil
+import time
 # from django.views.decorators.csrf import csrf_exempt
 # from django.utils.decorators import method_decorator
 
@@ -99,6 +101,10 @@ class Generate(generics.ListAPIView):
         final_clip = concatenate_videoclips(clips)
 
         final_clip.write_videofile(f"./temp/{video.session_id}/{video.video_id}_trimmed.mp4")
+
+        # Close any open files
+        final_clip.close()
+        clip.close()
         # (
         #     ffmpeg
         #     .input(f"./temp/{video.session_id}/{video.video_id}.mp4", ss=video.timestamps[0][0], to=video.timestamps[0][1])
@@ -130,10 +136,20 @@ class Download(generics.ListAPIView):
                 status=status.HTTP_404_NOT_FOUND
             )
 
-        response = FileResponse(open(file_path, 'rb'))
+        f = open(file_path, 'rb')
+        response = FileResponse(f)
         response['Content-Disposition'] = f'attachment; filename="{video_id}_trimmed.mp4"'
 
         return response
+
+
+class Delete(generics.ListAPIView):
+    http_method_names = ["delete"]
+
+    def delete(self, request, *args, **kwargs):
+        session_id = request.data.get("session_id")
+        shutil.rmtree(f"./temp/{session_id}")
+        return Response({"message": "Session deleted successfully"}, status=status.HTTP_200_OK)
 
 
 # Endpoint for gathering information about the session
