@@ -31,11 +31,11 @@ from django.contrib.auth.models import User
 
 class DiscordAuthenticationBackend(BaseBackend):
     def authenticate(self, request, user) -> DiscordUser:
-        find_user = DiscordUser.objects.filter(id=user["id"])
+        find_user = DiscordUser.objects.filter(id=user["id"]).first()
         print("User: ", user)
         print("User ID: ", user["id"])
         print("Find User: ", find_user)
-        if len(find_user) == 0:
+        if find_user is None:
             print("User not found. Saving...")
             new_user = DiscordUser.objects.create_new_discord_user(user)
             print(new_user)

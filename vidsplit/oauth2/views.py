@@ -83,7 +83,6 @@ class Discord_Redirect(generics.ListAPIView):
         user = exchange_code(code)
         discord_user = authenticate(request, user=user)
         print("DISCORD USER:::::", discord_user)
-        discord_user = discord_user.first()
         login(request, discord_user)
         response = redirect("http://127.0.0.1:8000")
         return response
