@@ -90,6 +90,16 @@ const DownloadPage = (props) => {
         downloadVideo();
         console.log(data);
       })
+      .then(() => {
+        fetch(`/api/delete`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrftoken,
+          },
+          body: JSON.stringify({ session_id: sessionID }),
+        });
+      })
       .catch((error) => {
         // Handle the error here
         console.log("Caught");

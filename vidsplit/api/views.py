@@ -10,6 +10,7 @@ from moviepy.editor import VideoFileClip, concatenate_videoclips
 from django.http import FileResponse, JsonResponse
 import os
 import shutil
+import time
 # from django.views.decorators.csrf import csrf_exempt
 # from django.utils.decorators import method_decorator
 
@@ -172,7 +173,6 @@ class Download(generics.ListAPIView):
             f = open(file_path, 'rb')
             response = FileResponse(f)
             response['Content-Disposition'] = f'attachment; filename="{video_id}_trimmed.mp4"'
-
             return response
         except:
             return JsonResponse(
@@ -188,9 +188,11 @@ class Delete(generics.ListAPIView):
     def delete(self, request, *args, **kwargs):
         try:
             session_id = request.data.get("session_id")
+            time.sleep(60)
             shutil.rmtree(f"./temp/{session_id}")
             return Response({"message": "Session deleted successfully"}, status=status.HTTP_200_OK)
-        except:
+        except Exception as e:
+            print(e)
             return JsonResponse(
                 {"error": "An error occurred while trying to delete the session. Please try again."},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -214,6 +216,6 @@ class Session(generics.ListAPIView):
             return Response(serializer.data)
         except:
             return JsonResponse(
-                {"error": "An error occurred while trying to gather information about the session. Please try again."},
+                {"error": "An error occurred while trying to fetch the session details. Please try again."},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
