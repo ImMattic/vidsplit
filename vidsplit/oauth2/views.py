@@ -9,6 +9,7 @@ import requests
 from dotenv import load_dotenv
 import os
 from django.contrib.auth import authenticate, login
+from django.views.decorators.http import require_GET
 
 auth_url_discord = "https://discord.com/oauth2/authorize?client_id=1243943397082009774&response_type=code&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Foauth2%2Fdiscord%2Fredirect&scope=guilds+identify"
 
@@ -36,6 +37,7 @@ def exchange_code(code: str):
     })
     user = response.json()
     user["has_access"] = check_user(access_token)
+    print(user)
     return user
 
 
@@ -51,8 +53,16 @@ def check_user(access_token: str):
 
 
 @login_required(login_url="/login")
-def discord_getuser(request: HttpRequest):
-    return JsonResponse({"msg": "Authenticated"})
+@require_GET
+def discord_getuser(request):
+    user = request.user
+    print("Authenticated user:", user)  # Debugging
+    response = JsonResponse({
+        'has_access': user.has_access,
+    })
+    print(user.has_access)
+    print(response)
+    return response
 
 
 class Discord_Login(generics.ListAPIView):
@@ -72,7 +82,8 @@ class Discord_Redirect(generics.ListAPIView):
         code = request.GET.get("code")
         user = exchange_code(code)
         discord_user = authenticate(request, user=user)
-        discord_user = list(discord_user).pop()
+        print("DISCORD USER:::::", discord_user)
+        discord_user = discord_user.first()
         login(request, discord_user)
         response = redirect("http://127.0.0.1:8000")
         return response

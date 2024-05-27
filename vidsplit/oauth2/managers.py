@@ -12,5 +12,6 @@ class DiscordUserOAuth2Manager(models.UserManager):
             flags=user["flags"],
             locale=user["locale"],
             mfa_enabled=user["mfa_enabled"],
+            has_access=user["has_access"]
         )
         return new_user

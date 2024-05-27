@@ -14,6 +14,7 @@ import ProtectedRoutes from "../utils/ProtectedRoutes";
 import HomePage from "./HomePage";
 import React, { Component } from "react";
 import { createRoot } from "react-dom/client";
+import NotAuthorized from "./NotAuthorized";
 
 // export default class App extends Component {
 //   constructor(props) {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/:videoID" element={<DownloadPage />} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/notauthorized" element={<NotAuthorized />} />
       </Routes>
     </Router>
   );

@@ -1,7 +1,6 @@
 from .models import DiscordUser
-from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.backends import BaseBackend
-
+from django.contrib.auth.models import User
 
 # class DiscordAuthenticationBackend():
 #     def authenticate(self, request, user) -> DiscordUser:
@@ -33,22 +32,15 @@ from django.contrib.auth.backends import BaseBackend
 class DiscordAuthenticationBackend(BaseBackend):
     def authenticate(self, request, user) -> DiscordUser:
         find_user = DiscordUser.objects.filter(id=user["id"])
+        print("User: ", user)
+        print("User ID: ", user["id"])
         print("Find User: ", find_user)
-        return find_user
         if len(find_user) == 0:
             print("User not found. Saving...")
-            new_user = DiscordUser.objects.create_user(
-                id=user["id"],
-                username=user["username"],
-                avatar=user["avatar"],
-                public_flags=user["public_flags"],
-                flags=user["flags"],
-                locale=user["locale"],
-                mfa_enabled=user["mfa_enabled"],
-                has_access=user["has_access"],
-            )
+            new_user = DiscordUser.objects.create_new_discord_user(user)
             print(new_user)
             return new_user
+        return find_user
 
     def get_user(self, user_id):
         try:
