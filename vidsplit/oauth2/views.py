@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpRequest, HttpResponse
 from django.contrib.auth.decorators import login_required
-from rest_framework import generics, status
-from .serializers import UserSerializer
+from rest_framework import generics
 from .models import User
 from rest_framework.response import Response
 import requests
@@ -37,7 +36,6 @@ def exchange_code(code: str):
     })
     user = response.json()
     user["has_access"] = check_user(access_token)
-    print(user)
     return user
 
 
@@ -56,12 +54,9 @@ def check_user(access_token: str):
 @require_GET
 def discord_getuser(request):
     user = request.user
-    print("Authenticated user:", user)  # Debugging
     response = JsonResponse({
         'has_access': user.has_access,
     })
-    print(user.has_access)
-    print(response)
     return response
 
 
@@ -69,7 +64,6 @@ class Discord_Login(generics.ListAPIView):
     http_method_names = ["get"]
 
     def get(self, request, *args, **kwargs):
-        # auth_session = request.GET.get("auth_session")
         response = redirect(auth_url_discord)
         return response
 
@@ -78,11 +72,12 @@ class Discord_Redirect(generics.ListAPIView):
     http_method_names = ["get"]
 
     def get(self, request, *args, **kwargs):
-        # auth_session = request.GET.get("auth_session")
-        code = request.GET.get("code")
-        user = exchange_code(code)
-        discord_user = authenticate(request, user=user)
-        print("DISCORD USER:::::", discord_user)
-        login(request, discord_user)
-        response = redirect("http://127.0.0.1:8000")
-        return response
+        if request.GET.get("error"):
+            return redirect("http://127.0.0.1:8000/login")
+        else:
+            code = request.GET.get("code")
+            user = exchange_code(code)
+            discord_user = authenticate(request, user=user)
+            login(request, discord_user)
+            response = redirect("http://127.0.0.1:8000")
+            return response

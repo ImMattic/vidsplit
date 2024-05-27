@@ -66,10 +66,15 @@ const NotAuthorized = (props) => {
         alignItems="center"
       >
         <Grid item xs={12}>
-          <Typography variant="h3" align="center">
+          <Typography variant="h3" align="center" fontFamily="Poppins">
             Sorry bud 😔
           </Typography>
-          <Typography variant="h5" align="center" marginTop="0.5%">
+          <Typography
+            variant="h5"
+            align="center"
+            marginTop="0.5%"
+            fontFamily="Poppins"
+          >
             You weren't on the list. But don't fret! We'll be opening to the
             public soon. Stay tuned!
           </Typography>

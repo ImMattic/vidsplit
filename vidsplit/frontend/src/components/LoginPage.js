@@ -66,10 +66,20 @@ const LoginPage = (props) => {
         alignItems="center"
       >
         <Grid item xs={12}>
-          <Typography variant="h3" align="center">
+          <Typography
+            fontWeight="bold"
+            variant="h3"
+            align="center"
+            fontFamily="Poppins"
+          >
             Woah there pardner! ✋🤠
           </Typography>
-          <Typography variant="h5" align="center" marginTop="0.5%">
+          <Typography
+            variant="h5"
+            align="center"
+            marginTop="0.5%"
+            fontFamily="Poppins"
+          >
             VidSplit is currently in a closed beta. Please sign in below and
             we'll see if you're on the list.
           </Typography>

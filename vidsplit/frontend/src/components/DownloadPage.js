@@ -9,13 +9,14 @@ import {
   Box,
   CssBaseline,
   CircularProgress,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import { TimeField, LocalizationProvider } from "@mui/x-date-pickers";
 import logo from "../assets/vidsplit-logo-dark-mode.png";
 import Cookies from "js-cookie";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { nanoid } from "nanoid";
 
 // Defines the dark theme for the page
 const darkTheme = createTheme({
@@ -45,6 +46,8 @@ const DownloadPage = (props) => {
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
   const [loading, setLoading] = useState(false);
   const csrftoken = Cookies.get("csrftoken");
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [open, setOpen] = useState(false);
 
   // Timestamp handling functions
   const addTimestamp = () => {
@@ -74,11 +77,25 @@ const DownloadPage = (props) => {
       },
       body: JSON.stringify(timestampData),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          // If the response status is not OK, reject the promise
+          return response.json().then((error) => {
+            throw new Error(error.error);
+          });
+        }
+        return response.json();
+      })
       .then((data) => {
         downloadVideo();
         console.log(data);
-        // window.location.href = `/download/${data.session_id}`;
+      })
+      .catch((error) => {
+        // Handle the error here
+        console.log("Caught");
+        setErrorMessage(error.message);
+        setOpen(true);
+        setLoading(false);
       });
   };
 
@@ -106,20 +123,6 @@ const DownloadPage = (props) => {
         a.click();
         window.URL.revokeObjectURL(url);
       })
-      // .then(() => {
-      //   // Start a new promise chain to fetch /api/delete
-      //   return fetch(`/api/delete?session_id=${sessionID}`, {
-      //     method: "DELETE",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       "X-CSRFToken": csrftoken,
-      //     },
-      //     body: JSON.stringify({
-      //       session_id: sessionID,
-      //       video_id: video_id,
-      //     }),
-      //   });
-      // })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -345,6 +348,25 @@ const DownloadPage = (props) => {
           />
         )}
       </Box>
+      <Snackbar
+        open={open}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        autoHideDuration={10000} // Hide after 10 seconds
+        onClose={(event, reason) => {
+          if (reason === "clickaway") {
+            return;
+          }
+          setOpen(false);
+        }}
+      >
+        <Alert
+          onClose={() => setOpen(false)}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          {errorMessage}
+        </Alert>
+      </Snackbar>
     </ThemeProvider>
   );
 };
