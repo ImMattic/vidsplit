@@ -44,6 +44,7 @@ const DownloadPage = (props) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
   const [loading, setLoading] = useState(false);
+  const csrftoken = Cookies.get("csrftoken");
 
   // Timestamp handling functions
   const addTimestamp = () => {
@@ -69,6 +70,7 @@ const DownloadPage = (props) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken,
       },
       body: JSON.stringify(timestampData),
     })
@@ -127,6 +129,7 @@ const DownloadPage = (props) => {
   // Fetch video data when the page loads
   useEffect(() => {
     const sessionID = uuidv4(); // Generates a new session
+
     const videoData = {
       session_id: sessionID,
       video_id: videoId,
@@ -136,7 +139,7 @@ const DownloadPage = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-CSRFToken": "auth_csrftoken",
+        "X-CSRFToken": csrftoken,
       },
       body: JSON.stringify(videoData),
     })
@@ -146,6 +149,7 @@ const DownloadPage = (props) => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            "X-CSRFToken": csrftoken,
           },
         })
       )

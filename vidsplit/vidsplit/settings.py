@@ -86,7 +86,7 @@ WSGI_APPLICATION = "vidsplit.wsgi.application"
 
 SESSION_COOKIE_NAME = "auth_sessionid"
 
-CSRF_COOKIE_NAME = "auth_csrftoken"
+# CSRF_COOKIE_NAME = "auth_csrftoken"
 
 
 # Database
