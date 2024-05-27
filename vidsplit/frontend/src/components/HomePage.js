@@ -40,7 +40,7 @@ const HomePage = () => {
 
   const validateYoutubeURL = (url) => {
     const validate_regex = RegExp(
-      "^(http(s)?:\\/\\/)?((w){3}.)?youtu(be|.be)?(\\.com)?\\/(watch\\?v=|shorts\\/|playlist\\?list=)?([a-zA-Z0-9_-]{11})?$"
+      "^.*(?:(?:youtu\\.be\\/|v\\/|vi\\/|u\\/\\w\\/|embed\\/|shorts\\/)|(?:(?:watch)?\\?v(?:i)?=|\\&v(?:i)?=))([^#\\&\\?]*).*"
     );
     return validate_regex.test(url);
   };
