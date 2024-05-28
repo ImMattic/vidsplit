@@ -1,0 +1,16 @@
+.venv
+secret_key.txt
+.DS_STORE
+vidsplit/db.sqlite3
+**/__pycache__/
+**/migrations/
+**/vidpsplit/frontend/node_modules/
+node_modules/
+/secrets/*
+!/secrets/.gitignore
+/temp/*
+!/temp/.gitignore
+**/.env
+/whitelists/*
+!/whitelists/.gitignore
+sqlite3.exe

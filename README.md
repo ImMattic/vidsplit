@@ -1,4 +1,5 @@
-# Vidsplit
+<p align="center"><img src="https://github.com/ImMattic/vidsplit/blob/dev/vidsplit/frontend/src/assets/vidsplit-logo-dark-mode.png" width="500" height=auto /></p>
+
 ## Description
 A video download web app that allows you to splice together multiple segments of a video without the need for video editing software.
 
@@ -7,6 +8,8 @@ Main tutorial being used: https://www.youtube.com/watch?v=JD-age0BPVo&list=PLzMc
 ## Tasks
 ### Phase 1 - Beta
 - [ ] Support for Youtube videos
+- [ ] Discord and Google OAuth with whitelist
+- [ ] Internal API setup
 - [ ] Authentication screen and establishment of sessions to not allow access from the public
 - [ ] Nice looking and clean interface with a simple logo at the center top and a box to put in the URL
 - [ ] Ability to download the entire video or up to 10 segements
@@ -28,3 +31,24 @@ Main tutorial being used: https://www.youtube.com/watch?v=JD-age0BPVo&list=PLzMc
 - [ ] SponsorBlock implementation to quickly remove ad spots
 - [ ] Public API to not require the need to go through GUI
 - [ ] Accounts to save video segments to account
+
+## Stack
+### Front End
+- ReactJS
+- Javascript
+
+### Back End
+- Python
+- Django
+
+### Database
+- SQLite
+
+### Authentication
+- OAuth2
+
+# Logic
+![Logic diagram](https://github.com/ImMattic/vidsplit/blob/dev/assets/VidSplit-backend-logic.png)
+
+# API Endpoints
+![API Endpoint diagram](https://github.com/ImMattic/vidsplit/blob/dev/assets/vidsplit_api_endpoints.png)

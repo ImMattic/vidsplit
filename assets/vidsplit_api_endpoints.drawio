@@ -1,0 +1,121 @@
+<mxfile host="app.diagrams.net" modified="2024-05-20T15:51:18.918Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="1WXxURq7Qsi3zipqgKn8" version="24.4.4" type="device">
+  <diagram name="Page-1" id="wnjBvoCf8j60xdBYQnAi">
+    <mxGraphModel dx="2868" dy="1572" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="U8-RmxqKOcRaLi6vK4Wf-1" target="U8-RmxqKOcRaLi6vK4Wf-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="U8-RmxqKOcRaLi6vK4Wf-1" target="U8-RmxqKOcRaLi6vK4Wf-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="U8-RmxqKOcRaLi6vK4Wf-1" target="U8-RmxqKOcRaLi6vK4Wf-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="U8-RmxqKOcRaLi6vK4Wf-1" target="U8-RmxqKOcRaLi6vK4Wf-55">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-1" value="/api/initialize" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="240" y="120" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-2" value="Description: The first endpoint hit after entering the video URL into the homepage URL bar" style="rounded=0;whiteSpace=wrap;html=1;spacing=10;verticalAlign=top;align=left;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="485" y="170" width="310" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-4" value="&lt;b&gt;&lt;font style=&quot;font-size: 36px;&quot;&gt;&lt;u&gt;VidSplit API Endpoints&lt;/u&gt;&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="620" y="40" width="470" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-6" value="Methods:&lt;div style=&quot;font-size: 14px;&quot;&gt;GET - Not allowed&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;POST - Begins new session and generates Video() model using the session_id, video_id args passed to it&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;PUT - Not allowed&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;Delete - Not allowed&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacing=10;verticalAlign=top;align=left;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="485" y="240" width="310" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-10" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;span style=&quot;background-color: initial; font-size: 14px;&quot;&gt;Request:&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;{&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&quot;session_id&quot;: &quot;USER_SESSION_ID&quot;,&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&quot;video_id&quot;: &quot;YOUTUBE_VIDEO_ID&quot;,&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&quot;timestamps&quot;: []&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;}&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacing=10;verticalAlign=top;align=left;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="485" y="390" width="310" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="U8-RmxqKOcRaLi6vK4Wf-23" target="U8-RmxqKOcRaLi6vK4Wf-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="U8-RmxqKOcRaLi6vK4Wf-23" target="U8-RmxqKOcRaLi6vK4Wf-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="U8-RmxqKOcRaLi6vK4Wf-23" target="U8-RmxqKOcRaLi6vK4Wf-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="U8-RmxqKOcRaLi6vK4Wf-23" target="U8-RmxqKOcRaLi6vK4Wf-53">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-23" value="/api/generate" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="230" y="690" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-24" value="Description: Used to kick off the generation of the video based off timestamps passed to it. This is the 2nd API hit after the user enters in the timestamps." style="rounded=0;whiteSpace=wrap;html=1;spacing=10;verticalAlign=top;align=left;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="485" y="710" width="310" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-25" value="Methods:&lt;div style=&quot;font-size: 14px;&quot;&gt;GET - Not allowed&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;POST - Not allowed&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;PUT - Updates the Video() model with the timestamps passed in from the user&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;Delete - Not allowed&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacing=10;verticalAlign=top;align=left;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="485" y="810" width="315" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-26" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;span style=&quot;background-color: initial; font-size: 14px;&quot;&gt;Request:&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;{&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&quot;session_id&quot;: &quot;USER_SESSION_ID&quot;,&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&quot;timestamps&quot;: [[TS1,TS2],[TS1,TS2],[TS1,TS2]...]&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;}&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacing=10;verticalAlign=top;align=left;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="487.5" y="950" width="310" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="U8-RmxqKOcRaLi6vK4Wf-31" target="U8-RmxqKOcRaLi6vK4Wf-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="U8-RmxqKOcRaLi6vK4Wf-31" target="U8-RmxqKOcRaLi6vK4Wf-33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="U8-RmxqKOcRaLi6vK4Wf-31" target="U8-RmxqKOcRaLi6vK4Wf-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="U8-RmxqKOcRaLi6vK4Wf-31" target="U8-RmxqKOcRaLi6vK4Wf-42">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-31" value="/api/download" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="920" y="120" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-32" value="Description: Downloads the video to the user&#39;s computer" style="rounded=0;whiteSpace=wrap;html=1;spacing=10;verticalAlign=top;align=left;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1165" y="170" width="310" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-33" value="Methods:&lt;div style=&quot;font-size: 14px;&quot;&gt;GET - Sends video to user&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;POST - Not allowed&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;PUT - Not allowed&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;Delete - Not allowed&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacing=10;verticalAlign=top;align=left;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1165" y="240" width="310" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-34" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;span style=&quot;background-color: initial; font-size: 14px;&quot;&gt;Request:&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;{&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&quot;session_id&quot;: &quot;USER_SESSION_ID&quot;,&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;}&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacing=10;verticalAlign=top;align=left;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1165" y="370" width="310" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-42" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;Response:&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;{&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&quot;success&quot;: True/False,&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;}&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacing=10;verticalAlign=top;align=left;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1165" y="480" width="310" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="U8-RmxqKOcRaLi6vK4Wf-48" target="U8-RmxqKOcRaLi6vK4Wf-49">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="U8-RmxqKOcRaLi6vK4Wf-48" target="U8-RmxqKOcRaLi6vK4Wf-50">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="U8-RmxqKOcRaLi6vK4Wf-48" target="U8-RmxqKOcRaLi6vK4Wf-51">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="U8-RmxqKOcRaLi6vK4Wf-48" target="U8-RmxqKOcRaLi6vK4Wf-52">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-48" value="/api/session" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="915" y="690" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-49" value="Description: Used to obtain information about a given session" style="rounded=0;whiteSpace=wrap;html=1;spacing=10;verticalAlign=top;align=left;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1165" y="710" width="310" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-50" value="Methods:&lt;div style=&quot;font-size: 14px;&quot;&gt;GET - Sends video to user&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;POST - Not allowed&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;PUT - Not allowed&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;Delete - Not allowed&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacing=10;verticalAlign=top;align=left;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1165" y="780" width="310" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-51" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;span style=&quot;background-color: initial; font-size: 14px;&quot;&gt;Request:&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;{&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&quot;session_id&quot;: &quot;USER_SESSION_ID&quot;,&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;}&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacing=10;verticalAlign=top;align=left;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1165" y="910" width="310" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-52" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;Response:&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;{&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&quot;session_id&quot;: &quot;USER_SESSION_ID&quot;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&quot;video_id&quot;: &quot;YOUTUBE_VIDEO_ID&quot;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&quot;timestamps&quot;: [[TS1, TS2],[TS1,TS2]...]&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;}&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacing=10;verticalAlign=top;align=left;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1165" y="1030" width="310" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-53" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;span style=&quot;background-color: initial; font-size: 14px;&quot;&gt;Response:&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;{&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&quot;success&quot;: True/False&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;}&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacing=10;verticalAlign=top;align=left;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="487.5" y="1080" width="310" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="U8-RmxqKOcRaLi6vK4Wf-55" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;span style=&quot;background-color: initial; font-size: 14px;&quot;&gt;Response:&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;{&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&quot;success&quot;: True/False&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;}&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacing=10;verticalAlign=top;align=left;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="485" y="540" width="310" height="90" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,45 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  /*color: white;*/
+  /* background-color: #141f2b; */
+}
+
+#main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.homepageGrid {
+  height: 100%;
+  width: 100%;
+}
+
+.toplogoBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submitButton {
+  height: 56px;
+}
