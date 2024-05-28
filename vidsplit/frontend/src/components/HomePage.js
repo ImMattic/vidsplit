@@ -5,9 +5,13 @@ import {
   TextField,
   useMediaQuery,
   CssBaseline,
+  Fab,
+  Box,
 } from "@mui/material";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import logo from "../assets/vidsplit-logo-dark-mode.png";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const darkTheme = createTheme({
   palette: {
@@ -107,6 +111,29 @@ const HomePage = () => {
           </Button>
         </Grid>
       </Grid>
+      <Box sx={{ position: "fixed", bottom: 16, right: 16 }}>
+        <Fab
+          color="primary"
+          aria-label="Github"
+          component="a"
+          href="https://github.com/ImMattic/vidsplit/tree/main"
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{ marginRight: 1 }}
+        >
+          <GitHubIcon />
+        </Fab>
+        <Fab
+          color="primary"
+          aria-label="Donate"
+          component="a"
+          href="https://ko-fi.com/mattic"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FavoriteIcon />
+        </Fab>
+      </Box>
     </ThemeProvider>
   );
 };

@@ -11,12 +11,15 @@ import {
   CircularProgress,
   Snackbar,
   Alert,
+  Fab,
 } from "@mui/material";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import { TimeField, LocalizationProvider } from "@mui/x-date-pickers";
 import logo from "../assets/vidsplit-logo-dark-mode.png";
 import Cookies from "js-cookie";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 // Defines the dark theme for the page
 const darkTheme = createTheme({
@@ -377,6 +380,29 @@ const DownloadPage = (props) => {
           {errorMessage}
         </Alert>
       </Snackbar>
+      <Box sx={{ position: "fixed", bottom: 16, right: 16 }}>
+        <Fab
+          color="primary"
+          aria-label="Github"
+          component="a"
+          href="https://github.com/ImMattic/vidsplit/tree/main"
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{ marginRight: 1 }}
+        >
+          <GitHubIcon />
+        </Fab>
+        <Fab
+          color="primary"
+          aria-label="Donate"
+          component="a"
+          href="https://ko-fi.com/mattic"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FavoriteIcon />
+        </Fab>
+      </Box>
     </ThemeProvider>
   );
 };
