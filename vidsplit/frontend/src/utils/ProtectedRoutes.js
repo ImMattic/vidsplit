@@ -47,10 +47,6 @@ const ProtectedRoutes = () => {
     return <Navigate to={redirectTo} />;
   }
 
-  if (isAuthorized === null) {
-    return <div>Loading...</div>;
-  }
-
   return <Outlet />;
 };
 
