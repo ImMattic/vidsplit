@@ -1,4 +1,4 @@
-.venv
+venv
 secret_key.txt
 .DS_STORE
 vidsplit/db.sqlite3
@@ -14,3 +14,5 @@ node_modules/
 /whitelists/*
 !/whitelists/.gitignore
 sqlite3.exe
+.DJANGO_SECRET_KEY
+/config
