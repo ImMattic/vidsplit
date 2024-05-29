@@ -89,6 +89,15 @@ WSGI_APPLICATION = "vidsplit.wsgi.application"
 
 SESSION_COOKIE_NAME = "auth_sessionid"
 
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+    'vidsplit.net',
+    'https://vidsplit.net',
+    'http://vidsplit.net',
+]
+
+
 # CSRF_COOKIE_NAME = "auth_csrftoken"
 
 
