@@ -8,7 +8,7 @@ import os
 from django.contrib.auth import authenticate, login
 from django.views.decorators.http import require_GET
 
-auth_url_discord = "https://discord.com/oauth2/authorize?client_id=1243943397082009774&response_type=code&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Foauth2%2Fdiscord%2Fredirect&scope=guilds+identify"
+auth_url_discord = "https://discord.com/oauth2/authorize?client_id=1243943397082009774&response_type=code&redirect_uri=https%3A%2F%2Fvidsplit.net%2Foauth2%2Fdiscord%2Fredirect&scope=identify+guilds"
 
 # Load environment variables
 load_dotenv()
@@ -21,7 +21,7 @@ def exchange_code(code: str):
             "client_secret": os.getenv("ClientSecret"),
             "grant_type": "authorization_code",
             "code": code,
-            "redirect_uri": "http://127.0.0.1:8000/oauth2/discord/redirect",
+            "redirect_uri": "https://vidsplit.net/oauth2/discord/redirect",
             "scope": "identify",
         }
         headers = {
@@ -84,11 +84,11 @@ class Discord_Redirect(generics.ListAPIView):
 
     def get(self, request, *args, **kwargs):
         if request.GET.get("error"):
-            return redirect("http://127.0.0.1:8000/login")
+            return redirect("https://vidsplit.net/login")
         else:
             code = request.GET.get("code")
             user = exchange_code(code)
             discord_user = authenticate(request, user=user)
             login(request, discord_user)
-            response = redirect("http://127.0.0.1:8000")
+            response = redirect("https://vidsplit.net")
             return response
